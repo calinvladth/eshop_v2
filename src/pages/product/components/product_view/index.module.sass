@@ -1,0 +1,60 @@
+@import "../../../../assets/style/index"
+
+.box
+    background-color: $white
+    color: $black
+
+
+    * h1
+        font-size: 2.25rem
+        text-transform: capitalize
+
+    * p
+        font-size: 1.5rem
+
+.boxContent
+    width: 100%
+    max-width: $standard_max_width
+    margin: 0 auto
+
+    display: grid
+    grid-template-columns: 1fr $grid_size
+
+    > div
+        width: 100%
+        position: relative
+
+        &:nth-child(1)
+            display: flex
+            justify-content: flex-start
+            align-items: center
+
+            padding: 10rem 3rem 2.5rem 0
+
+
+.image
+    width: 45vw
+    min-height: 100vh
+    height: 100%
+    background-color: $purple
+
+    @include sm
+        width: 100%
+        height: 100vh
+        min-height: 35rem
+
+.info
+    width: 100%
+    padding: $section_margin $section_margin $section_margin 0
+
+    @include sm
+        padding: 0 1rem
+        margin-bottom: 1rem
+
+    > div
+        margin-top: 3rem
+
+        &:nth-child(1)
+            margin-top: 0
+
+

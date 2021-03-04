@@ -1,0 +1,38 @@
+@import '../../../../../assets/style/index'
+
+.box
+    $image_size: 7rem
+    width: 100%
+    height: auto
+
+    display: flex
+    overflow: auto
+    flex-direction: row
+    justify-content: flex-start
+    align-items: flex-start
+
+    //overflow: auto
+
+    @include md
+        margin-top: calc(#{$section_margin} / 2)
+
+    > div
+        min-width: $image_size
+        width: $image_size
+        height: calc(#{$image_size} * 1.15)
+        border: .1rem solid $black
+        background-color: $purple
+
+        margin-left: 1.5rem
+
+        cursor: pointer
+
+        &:hover
+            border: .1rem solid $orange
+            opacity: .9
+
+        &:nth-child(1)
+            margin-left: 0
+
+.imageActive
+    border: .2rem solid $orange !important

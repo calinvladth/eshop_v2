@@ -1,0 +1,30 @@
+@import '../../../assets/style/index'
+
+.box
+    > div
+        margin-top: 2rem
+
+        &:nth-child(1)
+            margin-top: 0
+
+        > form
+            display: grid
+            grid-template-columns: 1fr auto
+            grid-gap: 1rem
+
+            > input
+                width: 100%
+
+                &:focus
+                    border-color: $yellow !important
+
+            > button
+                background-color: $yellow
+                padding: 0 1.5rem
+                min-width: auto
+                min-height: auto
+                color: $black
+
+
+
+

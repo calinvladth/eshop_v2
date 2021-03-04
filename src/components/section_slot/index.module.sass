@@ -1,0 +1,28 @@
+@import '../../assets/style/index'
+
+.box
+    width: 100%
+    background-color: inherit
+    color: inherit
+
+    position: relative
+
+.boxContent
+    width: 100%
+    max-width: $standard_max_width
+    margin: 0 auto
+
+    display: grid
+    grid-template-columns: 1fr $grid_size
+
+    @include sm
+        grid-template-columns: 1fr
+
+    > div
+        width: 100%
+        position: relative
+
+        &:nth-child(1)
+            display: flex
+            justify-content: flex-start
+            align-items: center

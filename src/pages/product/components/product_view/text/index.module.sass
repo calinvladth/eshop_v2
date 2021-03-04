@@ -1,0 +1,44 @@
+@import '../../../../../assets/style/index'
+
+.box
+    width: 100%
+
+    > div
+        margin-top: 2.5rem
+
+        &:nth-child(1)
+            margin-top: 0
+
+.boxTitle
+    width: 100%
+    display: grid
+    grid-template-columns: 1fr auto
+    grid-gap: 2.5rem
+
+    @include xsm
+        grid-template-columns: 1fr
+
+    > div
+        width: 100%
+
+        &:nth-child(2)
+            text-align: end
+
+            @include xsm
+                text-align: start
+
+            * span
+                text-transform: lowercase
+
+.boxSpecs
+    width: 100%
+    height: auto
+
+    > p
+        font-size: 1.4rem
+
+        &:nth-child(1)
+            margin-top: 0
+
+        > span
+            text-transform: capitalize

@@ -1,0 +1,53 @@
+@import '../../../../assets/style/index'
+
+.box
+    background-color: $hero_green
+    color: $white
+
+    @include md
+        padding: 0 1rem
+
+
+.image
+    width: 50vw
+    height: 100vh
+    min-height: 60rem
+    background-color: $purple
+
+    @include sm
+        display: none
+
+
+.info
+    width: 100%
+    height: auto
+
+    @include sm
+        $margin_top: 15rem
+        height: calc(100vh - #{$margin_top} - #{$section_margin})
+        min-height: 35rem
+        margin-top: $margin_top
+        margin-bottom: $section_margin
+
+    > div
+        margin-top: 2.5rem
+        &:nth-child(1)
+            display: table-caption
+            margin-top: 0
+
+    * h1
+        font-size: 5rem
+        text-transform: uppercase
+        color: $white
+        line-height: 6rem
+        letter-spacing: .75rem
+
+    * button
+        font-size: 1.6rem
+        color: $black
+        background-color: $white
+
+.icons
+    position: absolute
+    bottom: 7.5rem
+    right: 2.5rem
