@@ -2,9 +2,9 @@ import {combineReducers} from "redux";
 import ProductsReducer from "./products/reducers";
 import ProductReducer from "./product/reducers";
 import CartReducer from "./cart/reducers";
-import AlertReducer from "./alerts/reducers";
 import ConfigReducers from "./config/reducers";
 import RelatedProductsReducer from "./related_products/reducers";
+import AlertReducer from "./alerts/reducers";
 
 const allReducers = combineReducers({
     config: ConfigReducers,

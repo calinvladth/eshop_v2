@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {createRef, useEffect} from 'react'
 import style from './layout.module.sass'
 import RelatedProductsComponent from "./components/related_products";
 import {useDispatch, useSelector} from "react-redux";
@@ -9,31 +9,42 @@ import SectionTitleComponent from "../../components/section_title";
 import LoadingComponent from "../../components/loading";
 import NotFoundComponent from "../../components/not_found";
 import ProductViewComponent from "./components/product_view";
+import {useHistory} from "react-router";
+import {ShopPath} from "../home";
 
 const ProductPage = () => {
     const dispatch = useDispatch()
+    const history = useHistory()
     const {product} = useSelector(state => state)
     const {id} = useParams()
+    const productRef = createRef()
 
 
     useEffect(() => {
         dispatch(GetProductByPk(id))
-        window.scrollTo(0, 0)
 
         return function cleanup() {
             dispatch(ClearProductState())
         }
+
     }, [id, dispatch])
 
     useEffect(() => {
-        if (product.success && product.loaded) document.title = product.data.name
+        if (product.success && product.loaded) {
+            document.title = product.data.name
+            productRef.current.scrollIntoView({behavior: 'smooth', block: 'start'})
+        }
+        if (product.loaded) {
+            if (!product.success) history.push(ShopPath)
+        }
+        // eslint-disable-next-line
     }, [product.success, product.loaded, product.data.name])
 
 
     if (product.success && product.loaded) {
         return (
             <div className={style.box}>
-                <div className={style.boxContent}>
+                <div className={style.boxContent} ref={productRef}>
 
                     <section>
                         <ProductViewComponent/>
@@ -42,7 +53,6 @@ const ProductPage = () => {
                     <section>
                         <DescriptionFullComponent description={product.data.description_long}/>
                     </section>
-
 
                     <section>
                         <SectionTitleComponent title={'Related Products'}/>

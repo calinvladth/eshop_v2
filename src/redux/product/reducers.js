@@ -23,8 +23,7 @@ const ProductReducer = (state = initialState, action) => {
 
         default:
             return {
-                ...state,
-                loaded: true
+                ...state
             }
     }
 }

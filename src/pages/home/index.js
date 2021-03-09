@@ -7,7 +7,7 @@ import AboutComponent from "./components/about";
 
 export const HomePath = '/'
 const shop = 'shop'
-const ShopHash = `#${shop}`
+export const ShopHash = `#${shop}`
 export const ShopPath = `${HomePath}${ShopHash}`
 
 
@@ -15,24 +15,29 @@ const HomePage = () => {
     const location = useLocation()
 
     const shopRef = createRef()
+    const shopRef1 = createRef()
+    const homeRef = createRef()
 
+    document.title = "Shop";
     useEffect(() => {
-        document.title = "Shop";
         if (location.hash === ShopHash) {
-            window.scrollTo(0, shopRef.current.offsetTop)
+            if (shopRef && shopRef.current) shopRef.current.scrollIntoView({behavior: 'smooth', block: 'start'})
+            else shopRef1.current.scrollIntoView({behavior: 'smooth', block: 'start'})
+        } else {
+            homeRef.current.scrollIntoView({behavior: 'smooth', block: 'start'})
         }
-    }, [shopRef, location])
+    }, [shopRef, shopRef1, homeRef, location])
 
 
     return (
-        <div className={style.box}>
+        <div className={style.box} ref={homeRef}>
             <section>
                 <HeroComponent/>
             </section>
             <section>
                 <AboutComponent/>
             </section>
-            <section ref={shopRef}>
+            <section ref={shopRef1}>
                 <ShopSectionComponent shopRef={shopRef}/>
             </section>
         </div>

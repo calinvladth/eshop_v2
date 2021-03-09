@@ -19,6 +19,7 @@ const TextComponent = ({currency, product, specs}) => (
         </div>
 
         <div className={style.boxSpecs}>
+            <p><span>Category</span>: {product.data.category.category.name}</p>
             {
                 specs.map(o => <p key={o.id}><span>{o.key}</span>: {o.value}</p>)
             }

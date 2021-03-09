@@ -9,7 +9,6 @@ import {
 } from "./services";
 import {ERROR_CART_DATA, RENDER_CART_DATA} from "./types";
 import {api} from "../../config";
-import {SetAlert} from "../alerts/actions";
 
 export const PostCartItem = (id, quantity = 1, full_quantity = false, from_shop=false) => (dispatch, getState) => {
 
@@ -25,13 +24,6 @@ export const PostCartItem = (id, quantity = 1, full_quantity = false, from_shop=
     updateCartInLocalStorage(cart)
 
     dispatch(RenderCartData())
-
-    if (from_shop) {
-        dispatch(SetAlert({
-            success: true,
-            message: 'Cart was updated'
-        }))
-    }
 }
 
 export const RemoveCartItem = (id) => (dispatch, getState) => {

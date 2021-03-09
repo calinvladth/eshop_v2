@@ -3,6 +3,7 @@ import style from './index.module.sass'
 import {setBackgroundImage} from "../../../../services/image";
 import HeroImage from "../../../../assets/images/contact_hero.jpg";
 import SectionSlotComponent from "../../../../components/section_slot";
+import {contactData, contactpageData} from "../../../../data";
 
 const HeroComponent = () => (
     <div className={style.box}>
@@ -20,16 +21,16 @@ const BackgroundComponent = () => (
 const InfoComponent = () => (
     <div className={style.info}>
         <div>
-            <h1>Contact us</h1>
+            <h1>{contactpageData.title}</h1>
         </div>
         <div>
-            <p>Feel free to contact us and we will get back to you ass soon as possible!</p>
+            <p>{contactpageData.subtitle}</p>
         </div>
 
         <div>
-            <p>232 Bubby Drive. Austin Texas</p>
-            <p>512-563-3420</p>
-            <p>example@email.com</p>
+            <p>{contactData.address}</p>
+            <p>{contactData.phone}</p>
+            <p>{contactData.email}</p>
         </div>
     </div>
 )

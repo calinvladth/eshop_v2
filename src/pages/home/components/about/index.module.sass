@@ -1,52 +1,61 @@
 @import '../../../../assets/style/index'
 
 .box
-    background-color: $orange
-    color: $black
+  background-color: $orange
+  color: $black
 
 
 .image
-    position: absolute
-    right: 0
-    width: 60vw
-    height: 100%
+  position: absolute
+  right: 0
+  width: 60vw
+  height: 100%
 
-    background-color: $purple
+  background-color: $purple
 
-    @include sm
-        position: relative
-        width: 100%
-        height: 40vh
-        min-height: 35rem
+  @include sm
+    position: relative
+    width: 100%
+    height: 40vh
+    min-height: 35rem
 
 .infoBox
-    width: 100%
-    height: 75vh
-    min-height: 50rem
+  width: 100%
+  height: 75vh
+  min-height: 50rem
 
-    display: flex
-    justify-content: flex-end
-    align-items: center
+  display: flex
+  justify-content: flex-end
+  align-items: center
 
-    @include sm
-        height: 100vh
+  @include sm
+    height: 100vh
 
 .info
-    width: 100%
-    height: auto
+  width: 100%
+  height: auto
+  text-align: left
+  color: $white
+
+  @include sm
     text-align: center
-    color: $white
 
-    > div
-        &:nth-child(1)
-            margin-bottom: 2.5rem
+  > div
+    padding-left: 8rem
+    padding-right: 1rem
 
-        &:nth-child(2)
-            padding: 0 5rem
+    @include md
+      padding-left: 5rem
 
-    * h1
-        font-size: 2rem
-        text-transform: uppercase
+    @include sm
+      padding: 0 2.5rem
 
-    * p
-        font-size: 1.7rem
+    &:nth-child(1)
+      margin-bottom: 2.5rem
+
+  * h1
+    font-size: 2rem
+    text-transform: uppercase
+
+  * p
+    font-size: 1.7rem

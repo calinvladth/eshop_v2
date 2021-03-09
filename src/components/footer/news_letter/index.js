@@ -2,26 +2,26 @@ import React, {useState} from "react";
 import style from "./index.module.sass";
 import axios from "axios";
 import {api} from "../../../config";
-import {useDispatch} from "react-redux";
-import {SetAlert} from "../../../redux/alerts/actions";
+import {useHistory} from "react-router";
+import {NewsletterSuccessPath} from "../../../pages/newsletter_success";
+import {newsletterData} from "../../../data";
 
 const NewsLetterComponent = () => {
     const [email, setEmail] = useState('')
-    const dispatch = useDispatch()
+    const history = useHistory()
 
     const submit = (e) => {
         e.preventDefault()
         axios({
             method: 'POST',
             url: `${api}/newsletter/`,
-            data: {email: email}
+            data: {email: email, shop: process.env.REACT_APP_SHOP_NAME}
         })
             .then(response => {
-                dispatch(SetAlert(response.data))
-
+                history.push(NewsletterSuccessPath)
             })
             .catch(error => {
-                dispatch(SetAlert({success: false, message: 'You are already subscribed'}))
+                history.push(NewsletterSuccessPath)
             })
         setEmail('')
     }
@@ -32,7 +32,7 @@ const NewsLetterComponent = () => {
                 <h2>Newsletter</h2>
             </div>
             <div>
-                <p>Sign up for exciting sales and updates about our new products.</p>
+                <p>{newsletterData.reason}</p>
             </div>
 
             <div>

@@ -6,6 +6,7 @@ import SocialComponent from "../../../../components/social";
 import SectionSlotComponent from "../../../../components/section_slot";
 import {ShopPath} from "../../index";
 import {Link} from "react-router-dom";
+import {homepageData} from "../../../../data";
 
 const HeroComponent = () => (
     <div className={style.box}>
@@ -26,11 +27,11 @@ const BackgroundComponent = () => (
 const InfoComponent = () => (
     <div className={style.info}>
         <div>
-            <h1>For fresh summer days.</h1>
+            <h1>{homepageData.title}</h1>
         </div>
         <div>
             <Link to={ShopPath}>
-                <button className="button button--full">start shopping</button>
+                <button className="button button--full">{homepageData.shop_button}</button>
             </Link>
         </div>
     </div>

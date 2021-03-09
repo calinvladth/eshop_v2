@@ -4,8 +4,6 @@ import {useHistory} from "react-router";
 import {MessageSuccessPath} from "../../../../message_success/path";
 import axios from "axios";
 import {api} from "../../../../../config";
-import {SetAlert} from "../../../../../redux/alerts/actions";
-import {useDispatch} from "react-redux";
 
 
 const FormComponent = () => {
@@ -13,8 +11,6 @@ const FormComponent = () => {
     const [email, setEmail] = useState('')
     const [subject, setSubject] = useState('')
     const [message, setMessage] = useState('')
-
-    const dispatch = useDispatch()
 
     const history = useHistory()
 
@@ -26,7 +22,7 @@ const FormComponent = () => {
         axios({
             method: 'POST',
             url: `${api}/user_message/`,
-            data: data
+            data: {...data, shop: process.env.REACT_APP_SHOP_NAME}
         })
             .then(() => {
                 history.push(MessageSuccessPath)
@@ -35,7 +31,7 @@ const FormComponent = () => {
                 setSubject('')
                 setMessage('')
             })
-            .catch(error => dispatch(SetAlert(error.response.data)))
+            .catch(error => console.log('ERROR: ', error))
     }
 
     return (

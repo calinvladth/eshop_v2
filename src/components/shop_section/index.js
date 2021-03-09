@@ -5,19 +5,39 @@ import Pagination from "../../components/pagination";
 import {useDispatch, useSelector} from "react-redux";
 import {GetProducts} from "../../redux/products/actions";
 import ShopFiltersComponent from "./shop_filters";
+import {useHistory} from "react-router-dom";
+import {addQuery, useQuery} from "../../services/url";
+import {HomePath, ShopHash} from "../../pages/home";
+import LoadingComponent from "../loading";
 
 const ShopSectionComponent = ({shopRef}) => {
     const [showFilters, setShowFilters] = useState(false)
     const {products} = useSelector(state => state)
     const dispatch = useDispatch()
 
+    // Query
+    const history = useHistory()
+    const query = useQuery()
+    const page = query.get('page') || 1
+    let filters_data = {}
+    filters_data['page'] = query.get('page') || 1
+    if (query.get('sort_by')) filters_data['sort_by'] = query.get('sort_by')
+    if (query.get('category')) filters_data['category'] = query.get('category')
+
     useEffect(() => {
-        dispatch(GetProducts(1, filters))
-    }, [dispatch])
+        dispatch(GetProducts(page, filters_data))
+        // eslint-disable-next-line
+    }, [
+        dispatch,
+        filters_data.sort_by,
+        filters_data.page,
+        filters_data.category
+    ])
 
     function pagination(page = 1) {
-        window.scrollTo(0, shopRef.current.offsetTop)
-        dispatch(GetProducts(page, filters))
+        // If no page query, set to 1
+        filters_data['page'] = page
+        history.push(HomePath + `?${addQuery(filters_data)}` + ShopHash)
     }
 
     function filters() {
@@ -27,24 +47,31 @@ const ShopSectionComponent = ({shopRef}) => {
     return (
         <div className={style.box}>
             <div className={style.boxContent}>
-                <Pagination
-                    data={products.pagination}
-                    filters={{show: true, action: filters, name: 'Products'}}
-                    action={pagination}
-                >
-                    {
-                        showFilters && <ShopFiltersComponent setShowFilters={setShowFilters}/>
-                    }
-                    <div className={style.boxProducts}>
-                        {
-                            products.data.length > 0
-                                ?
-                                products.data.map(o => <ProductComponent key={o.id} product={o}/>)
-                                :
-                                <p>No products</p>
-                        }
-                    </div>
-                </Pagination>
+                {
+                    products.success && products.loaded
+                        ?
+                        <Pagination
+                            data={products.pagination}
+                            filters={{show: true, action: filters, name: 'Products'}}
+                            action={pagination}
+                        >
+                            {
+                                showFilters && <ShopFiltersComponent setShowFilters={setShowFilters}/>
+                            }
+                            <div className={style.boxProducts} ref={shopRef}>
+                                {
+                                    products.data.length > 0
+                                        ?
+                                        products.data.map(o => <ProductComponent key={o.id} product={o}/>)
+                                        :
+                                        <p>No products</p>
+                                }
+                            </div>
+                        </Pagination>
+                        :
+                        <LoadingComponent/>
+                }
+
             </div>
         </div>
     )
